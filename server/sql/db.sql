@@ -96,6 +96,8 @@ CREATE TABLE IF NOT EXISTS `butterfly`.`answers` (
   `score` INT NOT NULL,
   `comment` VARCHAR(300) NULL,
   `idQuestions` INT NOT NULL,
+  `date` DATE NULL,
+  `userId` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idAnswers`),
   INDEX `fk_answers_questions1_idx` (`idQuestions` ASC) VISIBLE,
   CONSTRAINT `fk_answers_questions1`
@@ -104,6 +106,32 @@ CREATE TABLE IF NOT EXISTS `butterfly`.`answers` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+INSERT INTO `butterfly`.`company` (`companyName`) VALUES ('JorgeRojas');
+
+INSERT INTO `butterfly`.`form` (`formName`, `idCompany`) VALUES ('How is your week going?', '1');
+
+
+INSERT INTO `butterfly`.`questiontype` (`questionType`) VALUES ('mood');
+INSERT INTO `butterfly`.`questiontype` (`questionType`) VALUES ('Roles and Responsibilities');
+INSERT INTO `butterfly`.`questiontype` (`questionType`) VALUES ('Workplace');
+INSERT INTO `butterfly`.`questiontype` (`questionType`) VALUES ('Management');
+INSERT INTO `butterfly`.`questiontype` (`questionType`) VALUES ('Teamwork');
+INSERT INTO `butterfly`.`questiontype` (`questionType`) VALUES ('Work/Life Balance');
+
+
+INSERT INTO `butterfly`.`questions` (`question`, `idForm`, `idQuestionType`) VALUES ('I am satisfied with my roles and responsibilities.', '1', '2');
+INSERT INTO `butterfly`.`questions` (`question`, `idForm`, `idQuestionType`) VALUES ('I like my work environment, and I believe it helps me perform at my best.', '1', '3');
+INSERT INTO `butterfly`.`questions` (`question`, `idForm`, `idQuestionType`) VALUES ('My direct manager gives me necessary support and clear objectives.', '1', '4');
+INSERT INTO `butterfly`.`questions` (`question`, `idForm`, `idQuestionType`) VALUES ('I feel comfortable working and interacting with the colleagues on my team.', '1', '5');
+INSERT INTO `butterfly`.`questions` (`question`, `idForm`, `idQuestionType`) VALUES ('I feel like I have a healthy work/life balance.', '1', '6');
+INSERT INTO `butterfly`.`questions` (`question`, `idForm`, `idQuestionType`, `message`, `resource`) VALUES ('1mood', '1', '1', 'Oops, something needs to change. Thank you for your Feedback.', 'https://svgur.com/i/q8g.svg');
+INSERT INTO `butterfly`.`questions` (`question`, `idForm`, `idQuestionType`, `message`, `resource`) VALUES ('2mood', '1', '1', 'Mmmmh, things should improve. Thank you for your Feedback.', 'https://svgur.com/i/qAe.svg');
+INSERT INTO `butterfly`.`questions` (`question`, `idForm`, `idQuestionType`, `message`, `resource`) VALUES ('3mood', '1', '1', 'OK… things could be better. Thank you for your Feedback.', 'https://svgur.com/i/q9Z.svg');
+INSERT INTO `butterfly`.`questions` (`question`, `idForm`, `idQuestionType`, `message`, `resource`) VALUES ('4mood', '1', '1', 'Great! Thank you for your Feedback.', 'https://svgur.com/i/qAn.svg');
+INSERT INTO `butterfly`.`questions` (`question`, `idForm`, `idQuestionType`, `message`, `resource`) VALUES ('5mood', '1', '1', 'Awesome! Thank you for your Feedback.', 'https://svgur.com/i/qB5.svg');
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
