@@ -3,7 +3,7 @@ import Joi from "joi"
 /**
  * Validation for add a Thing
  */
-const thingValidation = Joi.object({
+const answerValidation = Joi.object({
   idAnswer: Joi.number(),
   score: Joi.number(),
   comment: Joi.string(),
@@ -13,4 +13,4 @@ const thingValidation = Joi.object({
   idQuestion: Joi.number(),
 })
 
-export default { thingValidation }
+export default { answerValidation }

@@ -1,4 +1,4 @@
-export default interface Thing {
+export default interface Question {
   idQuestion: number
   question: string
   message: string

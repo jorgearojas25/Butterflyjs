@@ -1,4 +1,4 @@
-export default interface Thing {
+export default interface Form {
   idForm: number
   formName: string
   idCompany: number
