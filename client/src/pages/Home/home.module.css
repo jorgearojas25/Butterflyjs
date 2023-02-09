@@ -1,0 +1,59 @@
+.container{
+    align-items: center;
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.moodTracker{
+    align-items: center;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    width: 60vw;
+    height: 100px;
+
+}
+
+.header{
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 1em;
+}
+
+.companyName{
+    font-weight:bolder;
+    font-size: large;
+    color: aliceblue;
+}
+
+.companyMessage{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    font-weight: bolder;
+}
+
+.tracker{
+    padding: 1rem;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    background-color: aliceblue;
+    width: 100%;
+    gap: 1.5rem
+}
+
+.producer{
+    font-weight: bold;
+}
+
+
+.formTitle{
+    font-size: x-large;
+    font-weight: bolder;
+}

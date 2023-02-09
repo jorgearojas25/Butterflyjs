@@ -7,6 +7,7 @@ const UserSlice = createSlice({
   // state
 
   initialState: {
+    company: {},
     loading: 'idle',
     moodQuestions: [],
     questions: []
@@ -18,33 +19,48 @@ const UserSlice = createSlice({
       if (state.loading === 'idle') state.loading = 'pending'
     },
     loadMoodQuestions (state, action) {
-      if (state.loading === 'pending') {
-        state.loading = 'idle'
-        state.moodQuestions = action.payload
-      }
+      state.loading = 'idle'
+      state.moodQuestions = action.payload
     },
     loadQuestions (state, action) {
-      if (state.loading === 'pending') {
-        state.loading = 'idle'
-        state.questions = action.payload
-      }
+      console.log(action.payload)
+      state.loading = 'idle'
+      state.questions = action.payload
+    },
+    setCompany (state, action) {
+      console.log(action.payload)
+      state.loading = 'idle'
+      state.company = action.payload
     }
   }
 })
 
 const { actions, reducer } = UserSlice
 
-export const { loading, loadMoodQuestions, loadQuestions } = actions
+export const { loading, loadMoodQuestions, loadQuestions, setCompany } = actions
 
 export const loadMoods = () => async dispatch => {
   // start charging
   dispatch(loading())
 
   // get API data
-  const response = await axios.get('api/questions/type/1')
+  const response = await axios.get('api/question/type/1')
 
   // send API data
-  dispatch(loadQuestions(response.data.result ? response.data.entities : []))
+  dispatch(
+    loadMoodQuestions(response.data.result ? response.data.entities : [])
+  )
+}
+
+export const loadCompany = () => async dispatch => {
+  // start charging
+  dispatch(loading())
+
+  // get API data
+  const response = await axios.get('api/company')
+
+  // send API data
+  dispatch(setCompany(response.data.result ? response.data.entities[0] : []))
 }
 
 export const loadAllQuestions = () => async dispatch => {
@@ -52,7 +68,7 @@ export const loadAllQuestions = () => async dispatch => {
   dispatch(loading())
 
   // get API data
-  const response = await axios.get('api/questions/')
+  const response = await axios.get('api/question')
 
   // send API data
   dispatch(
