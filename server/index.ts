@@ -1,23 +1,10 @@
-import express from "express"
-import path from "path"
+import "dotenv/config"
+import validateEnv from "./utils/validateEnv"
+import App from "./app"
+import ThingNetwork from "./1.network/thing.network"
 
-const PORT = process.env.PORT || 5000
+validateEnv()
 
-const app = express()
+const app = new App([new ThingNetwork()], Number(process.env.PORT))
 
-app.use(express.json())
-// Serve the React static files after build
-app.use(express.static("../client/build"))
-
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`)
-})
-
-app.get("/api/hello", (req, res) => {
-  res.send({ message: "Hello" })
-})
-
-// All other unmatched requests will return the React app
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "..", "client", "build", "index.html"))
-})
+app.listen()
