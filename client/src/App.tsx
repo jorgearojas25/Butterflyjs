@@ -1,33 +1,33 @@
 import React from "react"
 import logo from "./logo.svg"
 import "./App.css"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import Home from "./pages/Home/Home"
+import Form from "./pages/Form/Form"
+import ThankYou from "./pages/ThankYou/ThankYou"
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  { path: "/mood/:id", element: <Form /> },
+  { path: "/thanks", element: <ThankYou /> },
+])
 
 function App() {
   React.useEffect(() => {
     const sayHello = async () => {
-      const response = await fetch("/api/thing")
+      const response = await fetch("/api/company")
       const body = await response.json()
       console.log(body)
     }
     sayHello()
   }, [])
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <RouterProvider router={router} />
+    </>
   )
 }
 

@@ -22,6 +22,14 @@ class QuestionNetwork implements Controller {
     this.router.get(`${this.path}`, this.listQuestions)
 
     /**
+     * Get question by questionTypeId
+     */
+    this.router.get(
+      `${this.path}/type/:questionTypeid`,
+      this.searchQuestionByTypeId
+    )
+
+    /**
      * Get question by Id
      */
     this.router.get(`${this.path}/:id`, this.searchQuestionById)
@@ -72,7 +80,25 @@ class QuestionNetwork implements Controller {
     next: NextFunction
   ): Promise<void | Question[]> => {
     try {
-      const data = await this.QuestionBusiness.searchQuestionById(req.params.id)
+      const data = await this.QuestionBusiness.searchQuestionById(
+        req.params.questionTypeid
+      )
+
+      response.success(res, data, 200, "Everyquestion is ok")
+    } catch (e: any) {
+      response.error(res, 500, "Internal Server Error", e)
+    }
+  }
+
+  private searchQuestionByTypeId = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void | Question[]> => {
+    try {
+      const data = await this.QuestionBusiness.searchQuestionByTypeId(
+        req.params.id
+      )
 
       response.success(res, data, 200, "Everyquestion is ok")
     } catch (e: any) {

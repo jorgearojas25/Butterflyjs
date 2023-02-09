@@ -37,6 +37,21 @@ class QuestionRepository implements Repository {
     }
   }
 
+  public async getQuestionByTypeId(
+    questionTypeid: any
+  ): Promise<any | Question[]> {
+    try {
+      const conn = await connect()
+      const questions = await conn.query(
+        `SELECT * FROM ${this.entitieName} WHERE idQuestionType = ${questionTypeid}`
+      )
+
+      return questions[0]
+    } catch (e) {
+      throw new Error("Unable to get questions")
+    }
+  }
+
   /**
    * Add one question
    * @param question Insert data

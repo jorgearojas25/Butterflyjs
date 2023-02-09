@@ -25,6 +25,20 @@ class QuestionBusiness {
     }
   }
 
+  public searchQuestionByTypeId = async (
+    questionTypeid: any
+  ): Promise<Question[] | void> => {
+    try {
+      const questions = await this.QuestionRepository.getQuestionByTypeId(
+        questionTypeid
+      )
+
+      return questions
+    } catch (e) {
+      throw e
+    }
+  }
+
   public addQuestion = async (
     question: Question
   ): Promise<Question[] | void> => {
