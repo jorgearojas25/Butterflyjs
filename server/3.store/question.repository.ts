@@ -12,7 +12,9 @@ class QuestionRepository implements Repository {
   public async getQuestions(): Promise<any | Question[]> {
     try {
       const conn = await connect()
-      const questions = await conn.query(querys.getAllRows(this.entitieName))
+      const questions = await conn.query(
+        "SELECT * FROM question LEFT JOIN questionType ON question.idQuestionType = questionType.idQuestionType"
+      )
 
       return questions[0]
     } catch (e) {
@@ -42,6 +44,9 @@ class QuestionRepository implements Repository {
   ): Promise<any | Question[]> {
     try {
       const conn = await connect()
+      console.log(
+        `SELECT * FROM ${this.entitieName} WHERE idQuestionType = ${questionTypeid}`
+      )
       const questions = await conn.query(
         `SELECT * FROM ${this.entitieName} WHERE idQuestionType = ${questionTypeid}`
       )

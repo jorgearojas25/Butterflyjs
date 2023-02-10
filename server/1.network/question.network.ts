@@ -80,9 +80,7 @@ class QuestionNetwork implements Controller {
     next: NextFunction
   ): Promise<void | Question[]> => {
     try {
-      const data = await this.QuestionBusiness.searchQuestionById(
-        req.params.questionTypeid
-      )
+      const data = await this.QuestionBusiness.searchQuestionById(req.params.id)
 
       response.success(res, data, 200, "Everyquestion is ok")
     } catch (e: any) {
@@ -97,7 +95,7 @@ class QuestionNetwork implements Controller {
   ): Promise<void | Question[]> => {
     try {
       const data = await this.QuestionBusiness.searchQuestionByTypeId(
-        req.params.id
+        req.params.questionTypeid
       )
 
       response.success(res, data, 200, "Everyquestion is ok")
