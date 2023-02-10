@@ -73,3 +73,35 @@
     flex-flow: column nowrap;
     gap: 1rem;
 }
+
+.comments{
+    display:  flex;
+    flex-flow: column;
+    gap: 1rem;
+    background-color: blueviolet;
+    padding: 2rem;
+    width: 60%;
+}
+
+.commentsText{
+    color: aliceblue;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.textArea{
+    width: 100%;
+    resize: none;
+    align-self: center;
+    height: 10vh;
+    font-size: 18px;
+    padding: 1rem;
+}
+
+.sendButton{
+    width: 13rem;
+    height: 4rem;
+    font-size: large;
+    color: #0e3967;
+    cursor: pointer;
+}

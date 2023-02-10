@@ -1,17 +1,22 @@
 import React from "react"
 import { useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import FormQuestion from "../../components/FormQuestion/FormQuestion"
 import MoodSelector from "../../components/MoodSelector/MoodSelector"
 import styles from "./form.module.css"
 
 const Form: React.FC = () => {
   const { id } = useParams()
+  const navigate = useNavigate()
   const [mood, setMood] = React.useState<any>()
   const [showTracker, setShowTracker] = React.useState(false)
   const questions = useSelector((state: any) => state.API.questions)
   const moods = useSelector((state: any) => state.API.moodQuestions)
   const companyName = useSelector((state: any) => state.API.company.companyName)
+
+  const handleSend = () => {
+    navigate("/thanks")
+  }
 
   React.useEffect(() => {
     console.log(moods, id)
@@ -67,10 +72,16 @@ const Form: React.FC = () => {
             />
           ))}
           <div className={styles.comments}>
-            <p>Anything to add? (Optional)</p>
-            <textarea placeholder='Express yourself freely and safely. This will always remain anonymous.' />
+            <p className={styles.commentsText}>Anything to add? (Optional)</p>
+            <textarea
+              className={styles.textArea}
+              placeholder='Express yourself freely and safely. This will always remain anonymous.'
+            />
           </div>
         </div>
+        <button onClick={handleSend} className={styles.sendButton}>
+          Send 📩
+        </button>
       </div>
     </div>
   ) : (
