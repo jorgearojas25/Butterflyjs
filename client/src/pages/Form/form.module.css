@@ -1,0 +1,67 @@
+.container{
+    background: rgb(14,57,103);
+    background: linear-gradient(0deg, rgba(14,57,103,1) 0%, rgba(15,128,115,1) 100%);
+    display: flex;
+    flex-flow: column;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+.header{
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    justify-content: space-between;
+
+}
+
+.moodGroup{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 2rem;
+}
+
+.producer{
+    color: whitesmoke;
+    font-weight: bolder;
+    font-size: x-large;
+}
+
+
+
+.moodMessage{
+    font-weight: 700;
+    font-size: 22px;
+    color: whitesmoke;
+}
+
+.reminder{
+    padding-top: 0.5rem;
+    color: grey;
+}
+
+.changeMood{
+    background-color: aliceblue;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.formTitle{
+    font-size: large;
+    font-weight: bolder;
+    color: aliceblue;
+}
+
+.moodSelector{
+    background-color: #0e3967;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
+    align-items: center;
+    padding: 2rem;
+}
+
+.questionsGroup{
+    
+}
