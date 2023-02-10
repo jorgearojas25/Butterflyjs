@@ -8,7 +8,7 @@ const success = (
 ): void => {
     res.status(status || 200).send({
         result: true,
-        entities: entities,
+        entities,
         messages: messages || "Everything is fine!",
     });
 };

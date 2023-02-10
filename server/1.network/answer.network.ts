@@ -50,7 +50,7 @@ class AnswerNetwork implements Controller {
     this.router.delete(`${this.path}/:id`, this.deleteAnswerById)
   }
 
-  //* Network Methods
+  // * Network Methods
 
   private listAnswers = async (
     req: Request,

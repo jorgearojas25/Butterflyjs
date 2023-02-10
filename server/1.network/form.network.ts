@@ -50,7 +50,7 @@ class FormNetwork implements Controller {
     this.router.delete(`${this.path}/:id`, this.deleteFormById)
   }
 
-  //* Network Methods
+  // * Network Methods
 
   private listForms = async (
     req: Request,

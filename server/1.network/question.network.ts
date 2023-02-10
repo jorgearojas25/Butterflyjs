@@ -58,7 +58,7 @@ class QuestionNetwork implements Controller {
     this.router.delete(`${this.path}/:id`, this.deleteQuestionById)
   }
 
-  //* Network Methods
+  // * Network Methods
 
   private listQuestions = async (
     req: Request,

@@ -50,7 +50,7 @@ class CompanyNetwork implements Controller {
     this.router.delete(`${this.path}/:id`, this.deleteCompanyById)
   }
 
-  //* Network Methods
+  // * Network Methods
 
   private listCompanys = async (
     req: Request,
