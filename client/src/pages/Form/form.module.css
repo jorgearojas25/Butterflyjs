@@ -47,6 +47,12 @@
     cursor: pointer;
 }
 
+.formBody{
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 2rem;
+}
+
 .formTitle{
     font-size: large;
     font-weight: bolder;
@@ -63,5 +69,7 @@
 }
 
 .questionsGroup{
-    
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
 }

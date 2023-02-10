@@ -1,6 +1,7 @@
 import React from "react"
 import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
+import FormQuestion from "../../components/FormQuestion/FormQuestion"
 import MoodSelector from "../../components/MoodSelector/MoodSelector"
 import styles from "./form.module.css"
 
@@ -56,7 +57,20 @@ const Form: React.FC = () => {
         <p className={styles.formTitle}>
           Do you agree whith the following statements:
         </p>
-        <div className={styles.questionsGroup}></div>
+        <div className={styles.questionsGroup}>
+          {[...questions]?.map((q, i) => (
+            <FormQuestion
+              number={i + 1}
+              type={q.questionType}
+              total={questions?.length}
+              title={q.question}
+            />
+          ))}
+          <div className={styles.comments}>
+            <p>Anything to add? (Optional)</p>
+            <textarea placeholder='Express yourself freely and safely. This will always remain anonymous.' />
+          </div>
+        </div>
       </div>
     </div>
   ) : (
