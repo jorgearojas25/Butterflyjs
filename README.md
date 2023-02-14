@@ -11,8 +11,6 @@ Emotional tracker full stack service
 
 ## future work
 
-1. refactor anti patterns (magical button c:)
-2. review external resources when running in node server
-3. implement missing points
-4. ADD TESTING (!IMPORTANT)
-5. document
+1. refactor anti patterns (magical button and any typing c:)
+2. ADD TESTING (!IMPORTANT)
+3. Look for another aproach to SSG or SSR using last hydrate react version

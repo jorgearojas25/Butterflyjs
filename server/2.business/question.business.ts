@@ -1,3 +1,4 @@
+import { randomizeOrder } from "./../utils/randomize"
 import { Request, NextFunction } from "express"
 import QuestionRepository from "../3.store/question.repository"
 import Question from "../interfaces/Entities/Question/question.interface"
@@ -9,7 +10,7 @@ class QuestionBusiness {
     try {
       const questions = await this.QuestionRepository.getQuestions()
 
-      return questions
+      return randomizeOrder(questions)
     } catch (e) {
       throw e
     }

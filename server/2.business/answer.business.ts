@@ -35,6 +35,19 @@ class AnswerBusiness {
     }
   }
 
+  public saveAnswersList = async (
+    answers: Answer[]
+  ): Promise<Answer[] | void> => {
+    try {
+      answers.forEach(async (answer) => {
+        const result = await this.AnswerRepository.postAnswer(answer)
+        return result
+      })
+    } catch (e) {
+      throw e
+    }
+  }
+
   public updateAnswer = async (answer: Answer): Promise<Answer[] | void> => {
     try {
       const result = await this.AnswerRepository.updateAnswerById(answer)

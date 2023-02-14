@@ -36,6 +36,11 @@ class AnswerNetwork implements Controller {
     )
 
     /**
+     * Save a list of answers
+     */
+    this.router.post(`${this.path}/saveList`, this.saveListAnswers)
+
+    /**
      * Update one Answer
      */
     this.router.patch(
@@ -87,6 +92,20 @@ class AnswerNetwork implements Controller {
   ): Promise<void | Answer[]> => {
     try {
       const data = await this.AnswerBusiness.addAnswer(req.body)
+
+      response.success(res, data, 201, "Created")
+    } catch (e: any) {
+      response.error(res, 500, "Internal Server Error", e)
+    }
+  }
+
+  private saveListAnswers = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void | Answer[]> => {
+    try {
+      const data = await this.AnswerBusiness.saveAnswersList(req.body)
 
       response.success(res, data, 201, "Created")
     } catch (e: any) {

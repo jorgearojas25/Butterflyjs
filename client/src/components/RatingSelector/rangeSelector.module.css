@@ -1,0 +1,25 @@
+.starRating{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .on {
+    color: gold
+  }
+
+  .off {
+    
+    color: #ccc;
+  }
+
+  .star{
+    font-size: 40px;
+  }

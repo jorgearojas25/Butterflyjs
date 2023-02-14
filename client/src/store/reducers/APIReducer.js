@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { v4 as uuidv4 } from 'uuid'
 
 const UserSlice = createSlice({
   name: 'user',
@@ -7,10 +8,12 @@ const UserSlice = createSlice({
   // state
 
   initialState: {
+    answers: [],
     company: {},
     loading: 'idle',
     moodQuestions: [],
-    questions: []
+    questions: [],
+    userId: uuidv4()
   },
   reducers: {
     // actions that modify the state
@@ -31,13 +34,37 @@ const UserSlice = createSlice({
       console.log(action.payload)
       state.loading = 'idle'
       state.company = action.payload
+    },
+    cleanAnswers (state) {
+      state.answers = []
+    },
+    manageAnswer (state, action) {
+      const answer = state.answers.find(
+        a =>
+          a.idQuestion === action.payload?.idQuestion &&
+          a.userId === action.payload?.userId
+      )
+
+      if (answer === undefined) {
+        state.answers.push(action.payload)
+      } else {
+        const index = state.answers.indexOf(answer)
+        state.answers[index] = action.payload
+      }
     }
   }
 })
 
 const { actions, reducer } = UserSlice
 
-export const { loading, loadMoodQuestions, loadQuestions, setCompany } = actions
+export const {
+  loading,
+  loadMoodQuestions,
+  loadQuestions,
+  setCompany,
+  cleanAnswers,
+  manageAnswer
+} = actions
 
 export const loadMoods = () => async dispatch => {
   // start charging
@@ -80,6 +107,16 @@ export const loadAllQuestions = () => async dispatch => {
         : []
     )
   )
+}
+
+export const sendAnswers = answers => async dispatch => {
+  dispatch(loading())
+
+  const response = await axios.post('api/answer/saveList', answers)
+
+  if (response.data.result) {
+    dispatch(cleanAnswers())
+  }
 }
 
 export default reducer

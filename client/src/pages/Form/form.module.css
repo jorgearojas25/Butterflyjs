@@ -99,9 +99,22 @@
 }
 
 .sendButton{
+    background-color: aliceblue;
     width: 13rem;
     height: 4rem;
     font-size: large;
     color: #0e3967;
     cursor: pointer;
+}
+
+.sendButton:hover{
+    background-color: yellowgreen;
+}
+
+
+.sendButton:disabled,
+.sendButton[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }

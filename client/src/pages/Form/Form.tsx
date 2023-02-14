@@ -1,21 +1,26 @@
 import React from "react"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { useParams, useNavigate } from "react-router-dom"
 import FormQuestion from "../../components/FormQuestion/FormQuestion"
 import MoodSelector from "../../components/MoodSelector/MoodSelector"
+import { sendAnswers } from "../../store/reducers/APIReducer"
 import styles from "./form.module.css"
 
 const Form: React.FC = () => {
   const { id } = useParams()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [mood, setMood] = React.useState<any>()
   const [showTracker, setShowTracker] = React.useState(false)
   const questions = useSelector((state: any) => state.API.questions)
   const moods = useSelector((state: any) => state.API.moodQuestions)
   const companyName = useSelector((state: any) => state.API.company.companyName)
+  const userId = useSelector((state: any) => state.API.userId)
+  const answers = useSelector((state: any) => state.API.answers)
 
   const handleSend = () => {
     navigate("/thanks")
+    dispatch(sendAnswers(answers) as any)
   }
 
   React.useEffect(() => {
@@ -26,6 +31,11 @@ const Form: React.FC = () => {
     setMood(actualMood)
     setShowTracker(false)
   }, [id, moods])
+
+  const isSendDisabled = React.useMemo(() => {
+    const allAnswersFilled = [...answers].find((a) => a.score === 0)
+    return allAnswersFilled
+  }, [answers])
 
   const handleShowTracker = React.useCallback(() => {
     setShowTracker(true)
@@ -65,10 +75,11 @@ const Form: React.FC = () => {
         <div className={styles.questionsGroup}>
           {[...questions]?.map((q, i) => (
             <FormQuestion
+              userId={userId}
+              key={i + userId}
               number={i + 1}
-              type={q.questionType}
               total={questions?.length}
-              title={q.question}
+              {...q}
             />
           ))}
           <div className={styles.comments}>
@@ -79,7 +90,11 @@ const Form: React.FC = () => {
             />
           </div>
         </div>
-        <button onClick={handleSend} className={styles.sendButton}>
+        <button
+          disabled={isSendDisabled}
+          onClick={handleSend}
+          className={styles.sendButton}
+        >
           Send 📩
         </button>
       </div>

@@ -1,11 +1,60 @@
 import React from "react"
-import RangeSelector from "../RangeSelector/RangeSelector"
+import RatingSelector from "../RatingSelector/RangeSelector"
 import styles from "./formQuestion.module.css"
+import { useDispatch } from "react-redux"
+import { manageAnswer } from "../../store/reducers/APIReducer"
 
-const FormQuestion: React.FC<any> = (props: any) => {
+export interface Iquestion {
+  idQuestion: number
+  question: string
+  message: string
+  number: number
+  resource: string
+  total: number
+  idForm: number
+  idQuestionType: number
+  questionType: string
+  userId: string
+}
+
+export interface IAnswer {
+  idAnswer?: number
+  score: number
+  comment?: string
+  date: string
+  userId: string
+
+  idQuestion: number
+}
+
+const FormQuestion: React.FC<Iquestion> = (props: Iquestion) => {
+  const dispatch = useDispatch()
+  const { number, total, question, questionType, userId } = props
+
   const [showTextArea, setShowTextArea] = React.useState(false)
-  const { number, total, title, type } = props
+  const [comments, setComments] = React.useState("")
+  const [rating, setRating] = React.useState(0)
   const handleTextArea = () => {
+    setShowTextArea(true)
+  }
+  const onChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setComments(e.currentTarget.value)
+  }
+
+  React.useEffect(() => {
+    const date = new Date().toISOString().split("T")[0]
+    const answer: IAnswer = {
+      date: date,
+      idQuestion: props.idQuestion,
+      score: rating,
+      userId: userId,
+      comment: comments,
+    }
+    dispatch(manageAnswer(answer))
+  }, [dispatch, rating, comments])
+
+  const onClickRating = (index: number) => {
+    setRating(index)
     setShowTextArea(true)
   }
 
@@ -14,10 +63,10 @@ const FormQuestion: React.FC<any> = (props: any) => {
       <p className={styles.details}>
         {number} of {total}
       </p>
-      <p className={styles.details}>{type}</p>
-      <p className={styles.question}>{title}</p>
+      <p className={styles.details}>{questionType}</p>
+      <p className={styles.question}>{question}</p>
       <div className={styles.range}>
-        <RangeSelector />
+        <RatingSelector rating={rating} onClick={onClickRating} />
         <div className={styles.rangeNames}>
           <span>Disagree</span>
           <span>Agree</span>
@@ -27,7 +76,8 @@ const FormQuestion: React.FC<any> = (props: any) => {
       {showTextArea ? (
         <textarea
           className={styles.textArea}
-          placeholder={`Anything to add for ${type}`}
+          onChange={onChangeTextArea}
+          placeholder={`Anything to add for ${questionType}`}
         />
       ) : (
         <button onClick={handleTextArea} className={styles.showText}>
