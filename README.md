@@ -4,10 +4,10 @@ Emotional tracker full stack service
 ## run the project
 
 1. create a `.env` file in the root project as shown in the `.env.example` file
-2. run the sql database file
+2. run the sql database file in a mySQL instance
 3. `npm run build-prod` 
-4. `npm run dev` for devs
-5. `npm run server` note that isnt fully SSR
+4. `npm run dev`
+5. `npm run server` for static sites view
 
 ## future work
 
